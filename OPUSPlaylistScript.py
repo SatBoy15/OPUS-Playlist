@@ -1,8 +1,8 @@
 import urllib, urllib2, string, time
 print "Playlist OPUS by Albiii!"
-qual = raw_input("Type the Quality:\n 7:Low\n 17:Low/High\n 32:High\n 97:Super High\n ")
-#qual = "17"
-print "Setting quality to ",qual
+qual = raw_input("Type the Quality:\n 7:Low\n 17:Medium\n 32:High\n 97:Super-High\n ")
+print "Set quality to",qual
+#script OPUS-Token
 print "Getting OPUS-Token..."
 link = urllib.urlopen("http://racacaxtv.ga/mega.php?chn=VEYx&pls=RnJhbmNvcGhvbmVz")
 page = link.read()
@@ -52,16 +52,13 @@ stream4 = "http://live.francetv.fr/simulcast/France_4/hls_v1/" + tokfr4a + "/Fra
 stream5 = "http://live.francetv.fr/simulcast/France_5/hls_v1/" + tokfr5a + "/France_5-video=1465200-audio_AACL_fra_65600_345=65600.m3u8" + tokfr5b
 streamO = "http://live.francetv.fr/simulcast/France_O/hls_v1/" + tokfrOa + "/France_O-video=1465200-audio_AACL_fra_65600_355=65600.m3u8" + tokfrOb
 print "Got Tokens and Links, starting step 2..."
-#origin = file("origin.m3u","r")
 print "Reading origin file and copying it..."
 originweb = urllib.urlopen("http://tvmaster.hol.es/liste/origin.m3u")
 dest = originweb.read()
 print "Copied."
 originweb.close()
-#dest = origin.read()
-#origin.close()
 print "Opening Copy and replacing strings..."
-dest1 = file("play-weborigin.m3u","w")
+dest1 = file("play-weborigin-qual-"+qual+".m3u","w")
 data = time.strftime("%d/%m")
 dest = string.replace(dest,"datareplace",data)
 dest = string.replace(dest,"tokenchange",token)
@@ -76,6 +73,3 @@ dest1.write(dest)
 print "Writing last things..."
 dest1.close()
 print "OK, all done!"
-print "Fatto!"
-
-
